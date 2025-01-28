@@ -94,6 +94,8 @@ jobs:
       # Push the Docker image to the registry
       - name: Push Docker Image
         run: |
+          new_tag=${{ env.new_version }}
+          final_tag=${new_tag#v} # Remove the 'v' prefix
           docker push ${{ secrets.DOCKER_USERNAME }}/aspnetapp:$final_tag
       
       # Tag the commit with the new version
