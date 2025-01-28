@@ -101,7 +101,7 @@ jobs:
       # Tag the commit with the new version
       - name: Tag the new version
         run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
+          git config user.name "Luis Hernandez"
+          git config user.email "luis.hernandezv0803@gmail.com"
           git tag -a "${{ env.new_version }}" -m "Release ${{ env.new_version }}"
           git push origin "${{ env.new_version }}"
