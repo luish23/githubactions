@@ -89,12 +89,12 @@ jobs:
         run: |
           new_tag=${{ env.new_version }}
           final_tag=${new_tag#v} # Remove the 'v' prefix
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ github.event.inputs.app_name }}:$final_tag .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ inputs.app_name }}:$final_tag .
 
       # Push the Docker image to the registry
       - name: Push Docker Image
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/${{ github.event.inputs.app_name }}:$final_tag
+          docker push ${{ secrets.DOCKER_USERNAME }}/${{ inputs.app_name }}:$final_tag
       
       # Tag the commit with the new version
       - name: Tag the new version
