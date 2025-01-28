@@ -46,7 +46,9 @@ jobs:
       - name: Define New Version
         id: define_version
         run: |
-          IFS='.' read -r -a parts <<< "${{ env.latest_tag#v }}"
+          latest_tag=${{ env.latest_tag }}
+          clean_tag=${latest_tag#v} # Remove the 'v' prefix
+          IFS='.' read -r -a parts <<< "$clean_tag"
           major=${parts[0]}
           minor=${parts[1]}
           patch=${parts[2]}
@@ -57,7 +59,7 @@ jobs:
               minor=0
               patch=0
               ;;
-            features/*)
+            development)
               minor=$((minor + 1))
               patch=0
               ;;
