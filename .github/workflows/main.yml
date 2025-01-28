@@ -1,12 +1,13 @@
 name: Starter Workflow Demo
 
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       app_name:
         description: "Nombre del aplicativo (será usado como el nombre de la imagen)"
         required: true
-        default: "my-app"
+        default: "aspnetapp"
+        type: string
 
   push:
     branches: [ development ]
@@ -86,7 +87,7 @@ jobs:
       # Build the Docker image
       - name: Build Docker Image
         run: |
-          new_tag=${{ env.latest_tag }}
+          new_tag=${{ env.new_version }}
           final_tag=${new_tag#v} # Remove the 'v' prefix
           docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ github.event.inputs.app_name }}:$final_tag .
 
